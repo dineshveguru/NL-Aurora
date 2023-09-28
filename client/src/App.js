@@ -30,7 +30,11 @@ function App() {
         />
       </div>
       <div className="responses__container">
-        {responses.map((response) => response)}
+        {console.log(responses.reverse())}
+        {responses
+          .slice(0)
+          .reverse()
+          .map((response) => response)}
       </div>
     </div>
   );
