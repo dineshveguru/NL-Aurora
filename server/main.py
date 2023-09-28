@@ -1,15 +1,19 @@
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from py2neo import *
+from dotenv import dotenv_values
 import spacy
+
+# Environment Variables
+config = dotenv_values(".env")
 
 
 # Neo4j database connection
 def connect():
     global graph
     graph = Graph(
-        "neo4j+s://11da6074.databases.neo4j.io",
-        auth=("neo4j", "s4VCSjScsCexQnmJbCb__BHJkfcu6QD8oR_66kzv3hE"),
+        config["NEO4J_URL"],
+        auth=(config["NEO4J_USER"], config["NEO4J_PASSWORD"]),
     )
     tx = graph.begin()
     print("connected.....")
