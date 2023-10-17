@@ -1,0 +1,5 @@
+google-generativeai==0.1.0
+neo4j==5.12.0
+streamlit==1.22.0
+# streamlit-chat==0.1.1
+# streamlit-webrtc==0.45.0
