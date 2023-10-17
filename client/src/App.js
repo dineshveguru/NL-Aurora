@@ -3,7 +3,6 @@ import Input from "./components/Input";
 import axios from "axios";
 import Response from "./components/Response";
 import React, { useState } from "react";
-import Graph from "./components/Graph";
 
 function App() {
   const [data, setData] = useState(null);
@@ -17,7 +16,10 @@ function App() {
   function submitHandler() {
     axios.post("http://127.0.0.1:5000/query", { query }).then((res) => {
       setData(res.data);
-      setResponses([...responses, <Response query={query} data={res.data} />]);
+      setResponses([
+        ...responses,
+        <Response query={query} data={res.data} id={responses.length} />,
+      ]);
       setQuery("");
     });
   }

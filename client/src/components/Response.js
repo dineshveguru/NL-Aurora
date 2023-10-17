@@ -15,7 +15,8 @@ Dashboards.PluginHandler.addPlugin(DataGridPlugin);
 function Response(props) {
   console.log(props);
   const data = props.data.data ? props.data.data : [];
-  const containerId = `container_${props.query.replace(/\s+/g, "_")}`;
+  // const containerId = `container_${props.query.replace(/\s+/g, "_")}`;
+  const containerId = `container_${props.id}`;
   const [activeButton, setActiveButton] = useState("graph");
   const [showGraph, setShowGraph] = useState(false);
   // let dataKeys = props.data.data ? Object.keys(data[0]) : [];
@@ -78,10 +79,6 @@ function Response(props) {
   // Handle the next page button click
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
-  };
-
-  const graphClickHandler = () => {
-    console.log(data);
   };
 
   // Handle the previous page button click
@@ -157,14 +154,14 @@ function Response(props) {
         ],
       });
     }
-  }, [chartType, slice, xAxis, yAxis, props]);
+  }, [chartType, slice, xAxis, yAxis, data]);
 
   useEffect(() => {
     const chart = Highcharts.chart(containerId, config);
-    // return () => {
-    //   chart.destroy();
-    // };
-  }, [config, props]);
+    return () => {
+      chart.destroy();
+    };
+  }, [config, props, containerId]);
 
   return (
     <div className="response__block">
@@ -180,10 +177,6 @@ function Response(props) {
         </h3>
         <div className="view_switcher">
           <button
-            // onClick={() => {
-            //   () => setShowGraph(true);
-            //   () => setActiveButton("data");
-            // }}
             onClick={() => {
               setShowGraph(true);
               setActiveButton("data");
@@ -195,10 +188,6 @@ function Response(props) {
             Data
           </button>
           <button
-            // onClick={() => {
-            //   () => setShowGraph(false);
-            //   () => setActiveButton("graph");
-            // }}
             onClick={() => {
               setShowGraph(false);
               setActiveButton("graph");
