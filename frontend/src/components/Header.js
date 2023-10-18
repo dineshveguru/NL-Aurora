@@ -10,5 +10,5 @@ function Header() {
     </header>
   );
 }
-
+console.log("hi iD")
 export default Header;
