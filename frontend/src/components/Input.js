@@ -1,14 +1,5 @@
-function Input() {
+function Input(props) {
   return (
-    // <div className="pt-8 flex w-full justify-center">
-    //   <input
-    //     type="text"
-    //     placeholder="Enter query"
-    //     className="border border-gray-300 rounded-lg py-2 px-4 block w-1/2 appearance-none leading-normal"
-    //     autoFocus
-    //   />
-    // </div>
-
     <div className="w-5/6 pt-8">
       <form>
         <label
@@ -25,6 +16,7 @@ function Input() {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 20 20"
+              ß
             >
               <path
                 stroke="currentColor"
@@ -42,6 +34,8 @@ function Input() {
             placeholder="Search"
             required
             autoFocus
+            value={props.query}
+            onChange={props.queryHandler}
           />
           <button
             type="submit"
