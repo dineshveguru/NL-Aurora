@@ -4,24 +4,26 @@ import axios from "axios";
 
 function Card(props) {
   const query = props.query;
-  const [data, setData] = useState(null);
-  console.log(query);
-  const getData = async () => {
-    try {
-      const response = await axios.post("http://127.0.0.1:5000/query", {
-        query,
-      });
-      setData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const [data, setData] = useState(null);
+  // console.log(query);
+  // const getData = async () => {
+  //   try {
+  //     const response = await axios.post("http://127.0.0.1:5000/query", {
+  //       query,
+  //     });
+  //     return response.data;
+  //   } catch (error) {
+  //     return error;
+  //   }
+  // };
 
-  useEffect(() => {
-    getData()
-      .then(() => console.log("data fetched!"))
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   getData()
+  //     .then((res) => console.log("data fetched!", res))
+  //     .then((res) => setData(res))
+  //     .then(console.log(data))
+  //     .catch((err) => console.log(err));
+  // }, [data, query]);
 
   // async function getData() {
   //   try {
@@ -37,8 +39,8 @@ function Card(props) {
   return (
     <>
       <section className="w-5/6 rounded-lg bg-gray-200 px-10 py-10">
-        {data ? (
-          <Table />
+        {props.data ? (
+          <Table data={props.data.data} />
         ) : (
           <div role="status">
             <svg

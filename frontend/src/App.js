@@ -10,6 +10,7 @@ export default function App() {
 
   const [query, setQuery] = useState("");
   const [responses, setResponses] = useState([]);
+  const [data, setData] = useState(null);
 
   //Functions
 
@@ -18,12 +19,29 @@ export default function App() {
     console.log(query);
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("clicked");
-    setResponses([...responses, <Card query={query} />]);
-    setQuery("");
-  };
+  // const handleSubmit = (e) => {
+  //   console.log("query: ", query);
+  //   e.preventDefault();
+  //   console.log("clicked");
+
+  //   setResponses((prevData) => [...prevData, <Card query={query} />]);
+  //   setQuery("");
+  // };
+
+  function submitHandler() {
+    axios
+      .post("http://127.0.0.1:5000/query", { query })
+      .then((res) => {
+        setData(res.data);
+        setResponses([
+          ...responses,
+          <Card query={query} data={res.data} id={responses.length} />,
+        ]);
+        setQuery("");
+      })
+      .then(console.log(data))
+      .then(setData(null));
+  }
 
   // useEffect(() => {
   //   setResponses([...responses, <Card data={data} />]);
@@ -35,7 +53,7 @@ export default function App() {
         <Input
           query={query}
           queryHandler={queryHandler}
-          handleSubmit={handleSubmit}
+          handleSubmit={submitHandler}
         />
         {responses
           .slice(0)
