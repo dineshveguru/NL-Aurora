@@ -172,5 +172,7 @@ def handle_query():
             data = {"generated_query": generated_query, "data": result.data()}
             data = json.dumps(data)
             return data
+    except KeyError as e:
+        return f"Invalid Request data: {str(e)}", 400
     except Exception as e:
-        return f"Error retrieving data from database. Check query once!: {str(e)}"
+        return f"Error retrieving data from database. Check query once!: {str(e)}", 500
