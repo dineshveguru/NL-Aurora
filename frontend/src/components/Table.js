@@ -1,13 +1,10 @@
-import OptionCard from "./OptionCard";
 import React, { useState } from "react";
 
 function Table(props) {
-  console.log(props.data.data);
   const data = props.data.data ? props.data.data : [];
   const columns = data.length > 0 ? Object.keys(data[0]) : [];
-  console.log(columns);
   const [currentPage, setCurrentPage] = useState(0);
-  const rowsPerPage = 10;
+  const rowsPerPage = 5;
   const pageCount = Math.ceil(data.length / rowsPerPage);
   const startIndex = currentPage * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
@@ -21,7 +18,6 @@ function Table(props) {
   };
   return (
     <>
-      <OptionCard />
       <table className="w-full text-sm text-left border-2 border-gray-200">
         <thead className="bg-gray-100 text-xs uppercase">
           <tr>
