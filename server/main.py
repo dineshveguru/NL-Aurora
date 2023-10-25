@@ -165,8 +165,6 @@ def handle_query():
     generated_query = run_query(query)
     print(f"query generated: {generated_query}")
     try:
-        # results = graph.execute_query(generated_query)
-        # return json.dumps({"data": results.records, "keys": results.keys})
         with graph.session() as session:
             result = session.run(generated_query)
             data = {"generated_query": generated_query, "data": result.data()}

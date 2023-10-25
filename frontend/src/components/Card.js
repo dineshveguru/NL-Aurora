@@ -8,7 +8,8 @@ import Pie from "./Pie";
 
 function Card(props) {
   const [view, setView] = useState("table");
-  const col_length = Object.keys(props.data.data[0]).length;
+  const col_length =
+    props.data.data.length > 0 ? Object.keys(props.data.data[0]).length : 0;
   const handleView = (view) => {
     setView(view);
   };
